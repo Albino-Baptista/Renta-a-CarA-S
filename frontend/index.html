@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | RENT-A-CAR A&S</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>RENT-A-CAR A&S</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">Dashboard</a></li>
+      <li><a href="funcionarios.html">Funcionários</a></li>
+      <li><a href="clientes.html">Clientes</a></li>
+      <li><a href="veiculos.html">Veículos</a></li>
+      <li><a href="alugueis.html">Aluguéis</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <div class="grid">
+      <!-- Card de Resumo -->
+      <div class="card">
+        <h2>Resumo Geral</h2>
+        <div class="stats">
+          <div class="stat-item">
+            <h3>Aluguéis Ativos</h3>
+            <p id="alugueis-ativos">0</p>
+          </div>
+          <div class="stat-item">
+            <h3>Veículos Disponíveis</h3>
+            <p id="veiculos-disponiveis">0</p>
+          </div>
+          <div class="stat-item">
+            <h3>Clientes Ativos</h3>
+            <p id="clientes-ativos">0</p>
+          </div>
+          <div class="stat-item">
+            <h3>Receita Mensal</h3>
+            <p id="receita-mensal">KZ 0,00</p>
+          </div>
+        </div>
+      </div>
+      <div class="stats">
+  <div class="stat-item">
+    <h3>Aluguéis Ativos</h3>
+    <p id="alugueis-ativos" class="loading">0</p>
+  </div>
+  <div class="stat-item">
+    <h3>Veículos Disponíveis</h3>
+    <p id="veiculos-disponiveis" class="loading">0</p>
+  </div>
+  <div class="stat-item">
+    <h3>Clientes Ativos</h3>
+    <p id="clientes-ativos" class="loading">0</p>
+  </div>
+  <div class="stat-item">
+    <h3>Receita Mensal</h3>
+    <p id="receita-mensal" class="loading">R$ 0,00</p>
+  </div>
+</div>
+      <!-- Card de Aluguéis Recentes -->
+      <div class="card">
+        <h2>Aluguéis Recentes</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Veículo</th>
+              <th>Data</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody id="alugueis-recentes">
+            <!-- Dados serão preenchidos via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Card de Veículos -->
+      <div class="card">
+        <h2>Status da Frota</h2>
+        <canvas id="frota-chart" width="400" height="200"></canvas>
+        <div class="legend">
+          <span class="available">Disponível</span>
+          <span class="rented">Alugado</span>
+          <span class="maintenance">Manutenção</span>
+        </div>
+      </div>
+      
+      <!-- Card de Ações Rápidas -->
+      <div class="card">
+        <h2>Ações Rápidas</h2>
+        <div class="quick-actions">
+          <a href="alugueis.html" class="btn">Novo Aluguel</a>
+          <a href="clientes.html" class="btn">Cadastrar Cliente</a>
+          <a href="veiculos.html" class="btn">Adicionar Veículo</a>
+          <a href="funcionarios.html" class="btn">Registrar Funcionário</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="notification" class="notification"></div>
+  <!-- Adicionando Chart.js para gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
