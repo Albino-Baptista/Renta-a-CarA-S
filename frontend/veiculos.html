@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Veículos |RENT-A-CAR A&S</title>
+  <title>Veículos | RENT-A-CAR A&S</title>
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Adicionando ícones do Font Awesome para os botões -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
   <header>
@@ -19,14 +21,14 @@
       <li><a href="veiculos.html">Veículos</a></li>
       <li><a href="alugueis.html">Aluguéis</a></li>
     </ul>
-</nav>
+  </nav>
 
-<div class="container">
+  <div class="container">
     <div class="card">
-    <h2>Frota de Veículos</h2>
-    <table class="table">
+      <h2>Frota de Veículos</h2>
+      <table class="table">
         <thead>
-        <tr>
+          <tr>
             <th>ID</th>
             <th>Modelo</th>
             <th>Marca</th>
@@ -36,59 +38,125 @@
             <th>Diária</th>
             <th>Status</th>
             <th>Ações</th>
-        </tr>
+          </tr>
         </thead>
         <tbody id="lista-veiculos">
-        <!-- Dados serão preenchidos via JavaScript -->
+          <!-- Exemplo de linha com botões de ação -->
+          <tr>
+            <td>1</td>
+            <td>Fiesta</td>
+            <td>Ford</td>
+            <td>2022</td>
+            <td>ABC1D23</td>
+            <td>Hatch</td>
+            <td>15.000 KZ</td>
+            <td class="status-disponivel">Disponível</td>
+            <td>
+              <button class="btn-action btn-edit" onclick="editarVeiculo(1)">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button class="btn-action btn-delete" onclick="excluirVeiculo(1)">
+                <i class="fas fa-trash-alt"></i> Excluir
+              </button>
+            </td>
+          </tr>
+          <!-- As demais linhas serão preenchidas via JavaScript -->
         </tbody>
-    </table>
+      </table>
     </div>
     
     <div class="card">
-    <h2>Adicionar Veículo</h2>
-    <form id="form-veiculo">
+      <h2 id="form-title">Adicionar Veículo</h2>
+      <form id="form-veiculo">
+        <input type="hidden" id="id">
+        
         <div class="form-group">
-        <label for="marca">Marca</label>
-        <input type="text" id="marca" class="form-control" placeholder="Ex: Ford, Volkswagen" required />
+          <label for="marca">Marca</label>
+          <input type="text" id="marca" class="form-control" placeholder="Ex: Ford, Volkswagen" required />
         </div>
         
         <div class="form-group">
-        <label for="modelo">Modelo</label>
-        <input type="text" id="modelo" class="form-control" placeholder="Ex: Fiesta, Gol" required />
+          <label for="modelo">Modelo</label>
+          <input type="text" id="modelo" class="form-control" placeholder="Ex: Fiesta, Gol" required />
         </div>
         
         <div class="form-group">
-        <label for="ano">Ano</label>
-        <input type="number" id="ano" class="form-control" placeholder="2023" min="1900" max="2099" required />
+          <label for="ano">Ano</label>
+          <input type="number" id="ano" class="form-control" placeholder="2023" min="1900" max="2099" required />
         </div>
         
         <div class="form-group">
-        <label for="placa">Placa</label>
-        <input type="text" id="placa" class="form-control" placeholder="ABC1D23" required />
+          <label for="placa">Placa</label>
+          <input type="text" id="placa" class="form-control" placeholder="ABC1D23" required />
         </div>
         
         <div class="form-group">
-        <label for="tipo">Tipo de Veículo</label>
-        <select id="tipo" class="form-control" required>
+          <label for="tipo">Tipo de Veículo</label>
+          <select id="tipo" class="form-control" required>
             <option value="">Selecione o tipo</option>
             <option value="hatch">Hatch</option>
             <option value="sedan">Sedan</option>
             <option value="suv">SUV</option>
             <option value="pickup">Pickup</option>
             <option value="luxo">Luxo</option>
-        </select>
+          </select>
         </div>
         
         <div class="form-group">
-        <label for="diaria">Valor da Diária (KZ)</label>
-        <input type="number" id="diaria" class="form-control" placeholder="150.00" min="0" step="0.01" required />
+          <label for="diaria">Valor da Diária (KZ)</label>
+          <input type="number" id="diaria" class="form-control" placeholder="150.00" min="0" step="0.01" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" class="form-control" required>
+            <option value="disponivel">Disponível</option>
+            <option value="alugado">Alugado</option>
+            <option value="manutencao">Em Manutenção</option>
+          </select>
         </div>
         
         <button type="submit" class="btn btn-success">Cadastrar Veículo</button>
-    </form>
+        <button type="button" id="btn-cancelar" class="btn btn-secondary" style="display: none;">Cancelar Edição</button>
+      </form>
     </div>
-</div>
+  </div>
 
-<script src="js/veiculos.js"></script>
+  <script src="js/veiculos.js"></script>
+  <script>
+    // Funções de exemplo que devem ser implementadas no veiculos.js
+    function editarVeiculo(id) {
+      // Lógica para preencher o formulário com os dados do veículo selecionado
+      console.log("Editando veículo com ID:", id);
+      document.getElementById('form-title').textContent = "Editar Veículo";
+      document.getElementById('btn-cancelar').style.display = 'inline-block';
+      
+      // Exemplo de como preencher os campos (deve ser substituído por dados reais)
+      document.getElementById('id').value = id;
+      document.getElementById('marca').value = "Ford";
+      document.getElementById('modelo').value = "Fiesta";
+      document.getElementById('ano').value = "2022";
+      document.getElementById('placa').value = "ABC1D23";
+      document.getElementById('tipo').value = "hatch";
+      document.getElementById('diaria').value = "15000";
+      document.getElementById('status').value = "disponivel";
+    }
+    
+    function excluirVeiculo(id) {
+      // Lógica para confirmar e excluir o veículo
+      if (confirm("Tem certeza que deseja excluir este veículo?")) {
+        console.log("Excluindo veículo com ID:", id);
+        // Aqui você faria uma requisição para remover o veículo do banco de dados
+      }
+    }
+    
+    // Cancelar edição
+    document.getElementById('btn-cancelar').addEventListener('click', function() {
+      document.getElementById('form-veiculo').reset();
+      document.getElementById('id').value = '';
+      document.getElementById('form-title').textContent = "Adicionar Veículo";
+      this.style.display = 'none';
+    });
+  </script>
 </body>
 </html>

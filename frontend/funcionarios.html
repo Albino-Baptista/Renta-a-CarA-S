@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Funcionários | RENT-A-CAR A&S</title>
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Adicionando ícones do Font Awesome para os botões -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
   <header>
@@ -35,14 +37,31 @@
           </tr>
         </thead>
         <tbody id="lista-funcionarios">
-          <!-- Dados serão preenchidos via JavaScript -->
+          <!-- Exemplo de linha com botões de ação -->
+          <tr>
+            <td>1</td>
+            <td>Maria Santos</td>
+            <td>maria@rentacar.com</td>
+            <td>Administrador</td>
+            <td>
+              <button class="btn-action btn-edit" onclick="editarFuncionario(1)">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button class="btn-action btn-delete" onclick="excluirFuncionario(1)">
+                <i class="fas fa-trash-alt"></i> Excluir
+              </button>
+            </td>
+          </tr>
+          <!-- As demais linhas serão preenchidas via JavaScript -->
         </tbody>
       </table>
     </div>
     
     <div class="card">
-      <h2>Adicionar Funcionário</h2>
+      <h2 id="form-title">Adicionar Funcionário</h2>
       <form id="form-funcionario">
+        <input type="hidden" id="id">
+        
         <div class="form-group">
           <label for="nome">Nome</label>
           <input type="text" id="nome" class="form-control" placeholder="Nome completo" required />
@@ -53,9 +72,10 @@
           <input type="email" id="email" class="form-control" placeholder="Email corporativo" required />
         </div>
         
-        <div class="form-group">
+        <div class="form-group password-container">
           <label for="senha">Senha</label>
           <input type="password" id="senha" class="form-control" placeholder="Senha segura" required />
+          <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
         </div>
         
         <div class="form-group">
@@ -68,10 +88,62 @@
         </div>
         
         <button type="submit" class="btn btn-success">Cadastrar Funcionário</button>
+        <button type="button" id="btn-cancelar" class="btn btn-secondary" style="display: none;">Cancelar Edição</button>
       </form>
     </div>
   </div>
 
   <script src="js/funcionarios.js"></script>
+  <script>
+    // Funções de exemplo que devem ser implementadas no funcionarios.js
+    function editarFuncionario(id) {
+      // Lógica para preencher o formulário com os dados do funcionário selecionado
+      console.log("Editando funcionário com ID:", id);
+      document.getElementById('form-title').textContent = "Editar Funcionário";
+      document.getElementById('btn-cancelar').style.display = 'inline-block';
+      
+      // Exemplo de como preencher os campos (deve ser substituído por dados reais)
+      document.getElementById('id').value = id;
+      document.getElementById('nome').value = "Maria Santos";
+      document.getElementById('email').value = "maria@rentacar.com";
+      document.getElementById('cargo').value = "admin";
+      document.getElementById('senha').placeholder = "Deixe em branco para manter a atual";
+      document.getElementById('senha').required = false;
+    }
+    
+    function excluirFuncionario(id) {
+      // Lógica para confirmar e excluir o funcionário
+      if (confirm("Tem certeza que deseja excluir este funcionário?")) {
+        console.log("Excluindo funcionário com ID:", id);
+        // Aqui você faria uma requisição para remover o funcionário do banco de dados
+      }
+    }
+    
+    // Cancelar edição
+    document.getElementById('btn-cancelar').addEventListener('click', function() {
+      document.getElementById('form-funcionario').reset();
+      document.getElementById('id').value = '';
+      document.getElementById('form-title').textContent = "Adicionar Funcionário";
+      document.getElementById('senha').placeholder = "Senha segura";
+      document.getElementById('senha').required = true;
+      this.style.display = 'none';
+    });
+    
+    // Mostrar/ocultar senha
+    function togglePassword() {
+      const senhaInput = document.getElementById('senha');
+      const icon = document.querySelector('.toggle-password');
+      
+      if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        senhaInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+  </script>
 </body>
 </html>

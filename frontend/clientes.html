@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clientes | RENT-A-CAR A&S</title>
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Adicionando ícones do Font Awesome para os botões -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
   <header>
@@ -36,14 +38,32 @@
           </tr>
         </thead>
         <tbody id="lista-clientes">
-          <!-- Dados serão preenchidos via JavaScript -->
+          <!-- Exemplo de linha com botões de ação -->
+          <tr>
+            <td>1</td>
+            <td>João Silva</td>
+            <td>123456789LA123</td>
+            <td>(+244)-123-456-789</td>
+            <td>joao@exemplo.com</td>
+            <td>
+              <button class="btn-action btn-edit" onclick="editarCliente(1)">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button class="btn-action btn-delete" onclick="excluirCliente(1)">
+                <i class="fas fa-trash-alt"></i> Excluir
+              </button>
+            </td>
+          </tr>
+          <!-- As demais linhas serão preenchidas via JavaScript -->
         </tbody>
       </table>
     </div>
     
     <div class="card">
-      <h2>Adicionar Cliente</h2>
+      <h2 id="form-title">Adicionar Cliente</h2>
       <form id="form-cliente">
+        <input type="hidden" id="id">
+        
         <div class="form-group">
           <label for="nome">Nome Completo</label>
           <input type="text" id="nome" class="form-control" placeholder="Nome completo" required />
@@ -70,10 +90,44 @@
         </div>
         
         <button type="submit" class="btn btn-success">Cadastrar Cliente</button>
+        <button type="button" id="btn-cancelar" class="btn btn-secondary" style="display: none;">Cancelar Edição</button>
       </form>
     </div>
   </div>
 
   <script src="js/clientes.js"></script>
+  <script>
+    // Funções de exemplo que devem ser implementadas no clientes.js
+    function editarCliente(id) {
+      // Lógica para preencher o formulário com os dados do cliente selecionado
+      console.log("Editando cliente com ID:", id);
+      document.getElementById('form-title').textContent = "Editar Cliente";
+      document.getElementById('btn-cancelar').style.display = 'inline-block';
+      
+      // Exemplo de como preencher os campos (deve ser substituído por dados reais)
+      document.getElementById('id').value = id;
+      document.getElementById('nome').value = "João Silva";
+      document.getElementById('cpf').value = "123456789LA123";
+      document.getElementById('telefone').value = "(+244)-123-456-789";
+      document.getElementById('email').value = "joao@exemplo.com";
+      document.getElementById('endereco').value = "Rua das Flores, 123, Luanda";
+    }
+    
+    function excluirCliente(id) {
+      // Lógica para confirmar e excluir o cliente
+      if (confirm("Tem certeza que deseja excluir este cliente?")) {
+        console.log("Excluindo cliente com ID:", id);
+        // Aqui você faria uma requisição para remover o cliente do banco de dados
+      }
+    }
+    
+    // Cancelar edição
+    document.getElementById('btn-cancelar').addEventListener('click', function() {
+      document.getElementById('form-cliente').reset();
+      document.getElementById('id').value = '';
+      document.getElementById('form-title').textContent = "Adicionar Cliente";
+      this.style.display = 'none';
+    });
+  </script>
 </body>
 </html>

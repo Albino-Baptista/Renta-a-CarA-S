@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aluguéis | RENT-A-CAR A&S</title>
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Adicionando ícones do Font Awesome para os botões -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
   <header>
@@ -37,7 +39,24 @@
           </tr>
         </thead>
         <tbody id="lista-alugueis">
-          <!-- Dados serão preenchidos via JavaScript -->
+          <!-- Exemplo de linha com botões de ação -->
+          <tr>
+            <td>1</td>
+            <td>João Silva</td>
+            <td>Toyota Corolla (ABC-1234)</td>
+            <td>01/06/2023 - 10/06/2023</td>
+            <td>150.000 KZ</td>
+            <td>Ativo</td>
+            <td>
+              <button class="btn-action btn-edit" onclick="editarAluguel(1)">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button class="btn-action btn-delete" onclick="excluirAluguel(1)">
+                <i class="fas fa-trash-alt"></i> Excluir
+              </button>
+            </td>
+          </tr>
+          <!-- As demais linhas serão preenchidas via JavaScript -->
         </tbody>
       </table>
     </div>
@@ -106,10 +125,34 @@
         </div>
         
         <button type="submit" class="btn btn-success">Registrar Aluguel</button>
+        <button type="button" id="btn-cancelar" class="btn btn-secondary" style="display: none;">Cancelar Edição</button>
       </form>
     </div>
   </div>
 
   <script src="js/alugueis.js"></script>
+  <script>
+    // Funções de exemplo que devem ser implementadas no alugueis.js
+    function editarAluguel(id) {
+      // Lógica para preencher o formulário com os dados do aluguel selecionado
+      console.log("Editando aluguel com ID:", id);
+      document.getElementById('btn-cancelar').style.display = 'inline-block';
+    }
+    
+    function excluirAluguel(id) {
+      // Lógica para confirmar e excluir o aluguel
+      if (confirm("Tem certeza que deseja excluir este aluguel?")) {
+        console.log("Excluindo aluguel com ID:", id);
+        // Aqui você faria uma requisição para remover o aluguel do banco de dados
+      }
+    }
+    
+    // Cancelar edição
+    document.getElementById('btn-cancelar').addEventListener('click', function() {
+      document.getElementById('form-aluguel').reset();
+      document.getElementById('id').value = '';
+      this.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
