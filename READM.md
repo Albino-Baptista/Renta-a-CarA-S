@@ -14,7 +14,7 @@ Este é  um projeto de gestão de uma empresa Rent a Car, desenvolvido com o obj
 | 💻 Backend      | Django (Framework Python)        |
 | 🌐 Frontend     | HTML5, CSS3, JavaScript          |
 | 🧠 Linguagem    | Python 3                         |
-| 🧱 Base de Dados | SQLite (padrão do Django)        |
+| 🧱 Base de Dados | SQLite (padrão do Django) | laragon       |
 | 🧑🏽‍💻 Editor       | Visual Studio Code (VS Code)      |
 | 🔀 Versionamento| Git & GitHub                    |
 
